@@ -110,11 +110,15 @@ namespace LightControl
                 AlertDialog.Builder alert = new AlertDialog.Builder(activity);
                 alert.SetTitle("Remove device?");
                 alert.SetMessage("Press OK if you really want delete device");
-                alert.SetPositiveButton("OK", (senderAlert, args) =>
+                alert.SetPositiveButton("OK",(senderAlert, args) =>
                 {
+
                     HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
                     HWRH.webRestHandler(position.ToString(), null, null, null, "delete");
                     Toast.MakeText(activity, "DELETING DEVICE " + position.ToString(), ToastLength.Long).Show();
+                    MainActivity MA = new MainActivity();
+                    MA.notifyDataChanges();
+
                 });
 
                 alert.SetNegativeButton("Cancel", (senderAlert, args) =>
