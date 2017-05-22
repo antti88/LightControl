@@ -20,46 +20,18 @@ namespace LightControl
         Button btnDeleteDevice;
         Button btnAddDevice;
         // devices;
-        CustomListAdapter adapter;
+        public CustomListAdapter adapter;
 
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-            //listDevices = new List<devicesItem>();
+
             listDevices = new ObservableCollection<devicesItem>();
-
-            //GetDevices GD = new GetDevices();
-            //listDevices = await GD.GetDeviceList();
-            
-            //devicesDBList = new string[] { devices };
-
-            //for (int i = 0; i < devicesDBList.Length; ++i)
-            //{
-            //    Console.WriteLine("DeviceList: " + devicesDBList[i]);
-            //}
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    //Console.WriteLine("DeviceList: " + devicesDBList[i]);
-            //    devicesItem item = new devicesItem()
-            //    {
-
-            //        deviceId = i,
-            //        deviceName = "kahvinkeitin " + i,
-            //        deviceOn = "on ",
-            //        deviceOff = "off",
-            //        timer = 1
-            //    };
-
-            //    listDevices.Add(item);
-            //}
-
             lvDevices = FindViewById<ListView>(Android.Resource.Id.List);
             btnDeleteDevice = FindViewById<Button>(Resource.Id.btnDeleteDevice);
             btnAddDevice = FindViewById<Button>(Resource.Id.btnAddDevice);
             await getAdapter();
-            lvDevices.ChoiceMode = ChoiceMode.Single;
-            lvDevices.Adapter = adapter;
 
             lvDevices.ItemClick += LvDevices_ItemClick;
             btnAddDevice.Click += BtnAddDevice_Click;
@@ -69,10 +41,9 @@ namespace LightControl
         public async System.Threading.Tasks.Task getAdapter()
         {
             GetDevices GD = new GetDevices();
-            listDevices = await GD.GetDeviceList();
-            adapter = new CustomListAdapter(this, listDevices);
-            adapter.NotifyDataSetChanged();
-            //lvDevices.Adapter = adapter;
+            listDevices = await GD.GetDeviceList();          
+            adapter = new CustomListAdapter(this, listDevices);                      
+            lvDevices.Adapter = adapter;
 
 
         }
@@ -102,18 +73,29 @@ namespace LightControl
 
         protected void onResume()
         {
-            getAdapter();
+            Console.WriteLine("ONRESUME START:");
+            //listDevices.Clear();
+            //GetDevices GD = new GetDevices();
+            //listDevices = await GD.GetDeviceList();
+            //adapter.NotifyDataSetChanged();
         }
 
         protected void onStart()
         {
-            getAdapter();
+            Console.WriteLine("ONSTART START:");
+            //GetDevices GD = new GetDevices();
+            //listDevices = await GD.GetDeviceList();
+            //adapter.NotifyDataSetChanged();
         }
 
-        public void notifyDataChanges()
+        public void updateList(CustomListAdapter customadapter)
         {
-            adapter.NotifyDataSetChanged();
+            //lvDevices = FindViewById<ListView>(Android.Resource.Id.List);
+            //lvDevices.Invalidate();
+            //lvDevices.Adapter = customadapter;
+
         }
+
 
     }
 }

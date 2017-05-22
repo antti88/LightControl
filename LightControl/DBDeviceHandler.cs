@@ -20,12 +20,13 @@ namespace LightControl
         string dName;
         string dTimer;
         Context context;
-       public DBDeviceHandler(string device,string devicename, string timer)
+       public DBDeviceHandler(Context context,string device,string devicename, string timer)
 
         {
             this.dId = device;
             this.dName = devicename;
             this.dTimer = timer;
+            this.context = context;
 
         }
 

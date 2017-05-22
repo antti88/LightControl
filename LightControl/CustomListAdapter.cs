@@ -16,7 +16,7 @@ using System.Collections.ObjectModel;
 
 namespace LightControl
 {
-    class CustomListAdapter : BaseAdapter
+   public class CustomListAdapter : BaseAdapter
     {
         ObservableCollection<devicesItem> devicelistArrayList;
         private Activity activity;
@@ -111,15 +111,15 @@ namespace LightControl
                 alert.SetTitle("Remove device?");
                 alert.SetMessage("Press OK if you really want delete device");
                 alert.SetPositiveButton("OK",(senderAlert, args) =>
-                {
+                 {
 
-                    HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
-                    HWRH.webRestHandler(position.ToString(), null, null, null, "delete");
-                    Toast.MakeText(activity, "DELETING DEVICE " + position.ToString(), ToastLength.Long).Show();
-                    MainActivity MA = new MainActivity();
-                    MA.notifyDataChanges();
-
-                });
+                     HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
+                     HWRH.webRestHandler(position.ToString(), null, null, null, "delete");
+                     Toast.MakeText(activity, "DELETING DEVICE... " + position.ToString(), ToastLength.Long).Show();
+                     devicelistArrayList.RemoveAt(position);
+                     //Recreate activity for refreshing listview
+                     activity.Recreate();
+                 });
 
                 alert.SetNegativeButton("Cancel", (senderAlert, args) =>
                  {
