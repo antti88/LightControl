@@ -19,6 +19,7 @@ namespace LightControl
         // string[] devicesDBList;
         Button btnDeleteDevice;
         Button btnAddDevice;
+        string nonetwor="No Connection";
         // devices;
         public CustomListAdapter adapter;
 
@@ -31,8 +32,17 @@ namespace LightControl
             lvDevices = FindViewById<ListView>(Android.Resource.Id.List);
             btnDeleteDevice = FindViewById<Button>(Resource.Id.btnDeleteDevice);
             btnAddDevice = FindViewById<Button>(Resource.Id.btnAddDevice);
-            await getAdapter();
+            try
+            {
+                await getAdapter();
 
+            }
+            catch(Exception ex)
+            {
+
+                Console.WriteLine("Cant get Adapter: " + ex);
+                Toast.MakeText(this, "No devices dound! No Wlan on? wrong network?", ToastLength.Long).Show();
+            }
             lvDevices.ItemClick += LvDevices_ItemClick;
             btnAddDevice.Click += BtnAddDevice_Click;
             btnDeleteDevice.Click += BtnDeleteDevice_Click;
@@ -40,11 +50,39 @@ namespace LightControl
         }
         public async System.Threading.Tasks.Task getAdapter()
         {
-            GetDevices GD = new GetDevices();
-            listDevices = await GD.GetDeviceList();          
-            adapter = new CustomListAdapter(this, listDevices);                      
-            lvDevices.Adapter = adapter;
+            try
+            {
+                Log.Error(nonetwor, "getAdapter try: ");
+                GetDevices GD = new GetDevices();
+                listDevices = await GD.GetDeviceList();
+                Log.Error(nonetwor, "getAdapter Listdevice: ");
+                if (listDevices == null)
+                {
+                    Log.Error(nonetwor, "getAdapter Listdevice: null");
+                    Toast.MakeText(this, "No devices found! No Wlan on? wrong network?", ToastLength.Long).Show();
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
+                    alert.SetTitle("No network");
+                    alert.SetMessage("Connect network and try again");
+                    alert.SetPositiveButton("OK", (senderAlert, args) =>
+                    {
+                        this.Recreate();
+                    });
+                    Dialog dialog = alert.Create();
+                    dialog.Show();
+                }
+                else
+                {
+                    Log.Error(nonetwor, "getAdapter Listdevice: Else");
+                    adapter = new CustomListAdapter(this, listDevices);
+                    lvDevices.Adapter = adapter;
+                }
+            }
+            catch(Exception exce)
+            {
+                Log.Error(nonetwor, "getAdapter catch: " + exce);
+                Toast.MakeText(this, "No devices dound! No Wlan on? wrong network?", ToastLength.Long).Show();
+            }
 
         }
 
@@ -59,6 +97,8 @@ namespace LightControl
             Toast.MakeText(this, "Button ADD clicked", ToastLength.Short).Show();
             var activityAdd = new Intent(this, typeof(AddDevice));
             StartActivity(activityAdd);
+            this.OnPause();
+            
             
         }
 
@@ -71,17 +111,25 @@ namespace LightControl
             HWRH.webRestHandler(index.ToString(), null, null, null, "delete");
         }
 
-        protected void onResume()
+
+
+        protected override async void OnResume()
         {
+            base.OnResume();
             Console.WriteLine("ONRESUME START:");
+
+            await getAdapter();
             //listDevices.Clear();
             //GetDevices GD = new GetDevices();
             //listDevices = await GD.GetDeviceList();
             //adapter.NotifyDataSetChanged();
         }
 
-        protected void onStart()
+
+
+        protected override void OnRestart()
         {
+            base.OnStart();
             Console.WriteLine("ONSTART START:");
             //GetDevices GD = new GetDevices();
             //listDevices = await GD.GetDeviceList();

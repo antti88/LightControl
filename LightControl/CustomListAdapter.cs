@@ -13,6 +13,7 @@ using Java.Lang;
 using System.Net;
 using System.IO;
 using System.Collections.ObjectModel;
+using Android.Util;
 
 namespace LightControl
 {
@@ -34,7 +35,7 @@ namespace LightControl
         public override int Count
         {
             get
-            {
+            {            
                 return devicelistArrayList.Count;
             }
         }
@@ -83,6 +84,7 @@ namespace LightControl
                 HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
                 //Toast.MakeText(this.activity, devicelistArrayList[position].Name + "DEVICEON id: " + position, ToastLength.Short).Show();
                HWRH.webRestHandler(position.ToString(),null,"on",devicelistArrayList[position].timer.ToString(),"control");
+                Log.Info("ButtonOn: ","Clicked");
             };
 
             
@@ -92,8 +94,8 @@ namespace LightControl
                 HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
                 //Toast.MakeText(this.activity, devicelistArrayList[position].Name + "DEVICEON id: " + position, ToastLength.Short).Show();
                 HWRH.webRestHandler(position.ToString(), null, "off", "0", "control");
-                
-                
+                Log.Info("ButtonOFF: ", "Clicked");
+
             };
 
             localTimer.HandleOnClick = () =>

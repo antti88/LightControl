@@ -84,21 +84,21 @@ namespace LightControl
                 //    return "ERROR";
                 //}
 
-                ObservableCollection<devicesItem> itemsError = new ObservableCollection<devicesItem>();
-                devicesItem item = new devicesItem()
-                {
+                //ObservableCollection<devicesItem> itemsError = new ObservableCollection<devicesItem>();
+                //devicesItem item = new devicesItem()
+                //{
 
-                    deviceId = 1,
-                    deviceName = "ERROR ",
-                    deviceOn = "err ",
-                    deviceOff = "err",
-                    timer = 1
-                };
+                //    deviceId = 1,
+                //    deviceName = "ERROR ",
+                //    deviceOn = "err ",
+                //    deviceOff = "err",
+                //    timer = 1
+                //};
 
-                itemsError.Add(item);
+                //itemsError.Add(item);
                 
 
-                return itemsError;
+                return null;
             }
             catch (Exception exception)
             {
@@ -110,21 +110,21 @@ namespace LightControl
                 //    return "ERROR";
                 //}
 
-                ObservableCollection<devicesItem> itemsError = new ObservableCollection<devicesItem>();
-                devicesItem item = new devicesItem()
-                {
+                //ObservableCollection<devicesItem> itemsError = new ObservableCollection<devicesItem>();
+                //devicesItem item = new devicesItem()
+                //{
 
-                    deviceId = 1,
-                    deviceName = "ERROR ",
-                    deviceOn = "err ",
-                    deviceOff = "err",
-                    timer = 1
-                };
+                //    deviceId = 1,
+                //    deviceName = "ERROR ",
+                //    deviceOn = "err ",
+                //    deviceOff = "err",
+                //    timer = 1
+                //};
 
-                itemsError.Add(item);
+                //itemsError.Add(item);
 
 
-                return itemsError;
+                return null;
             }
         }
     }

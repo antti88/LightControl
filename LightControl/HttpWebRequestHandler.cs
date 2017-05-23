@@ -12,6 +12,8 @@ using Android.Widget;
 using System.Net;
 using System.IO;
 using System.Threading;
+using Android.Util;
+using System.Threading.Tasks;
 
 namespace LightControl
 {
@@ -37,7 +39,7 @@ namespace LightControl
                         url = "http://192.168.10.54/dbhandler.php/?device=" + deviceId  + "&state=delete";
                         break;
                     case "control":
-                        url = "http://192.168.10.54/controller.php/?device=" + deviceId + "&onoff=" + deviceState + "&timer=" + timer;
+                        url = "http://192.168.10.54/controller.php/?device=" + deviceId + "&onoff=" + deviceState + "&timer=" + timer;                      
                         break;
                     
                     default:
@@ -47,36 +49,45 @@ namespace LightControl
 
                 //**<-FIRE-AND-FORGET->**//
                 Console.WriteLine(url);
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                ThreadPool.QueueUserWorkItem(o => { request.GetResponse();});
-                //request.Method = "GET";
-                //using GET - request.Headers.Add ("Authorization","Authorizaation value");                   
-                //request.ContentType = "application/json";
-
-                //HttpWebResponse myResp = (HttpWebResponse)request.GetResponse();
-
-
-                //string responseText;
-
-                //using (var response = request.GetResponse())
-                //{
-                //    using (var reader = new StreamReader(response.GetResponseStream()))
-                //    {
-                //        responseText = reader.ReadToEnd();
-                //        Console.WriteLine(responseText);
-                //        Toast.MakeText(context, "Request send to id: " + deviceId, ToastLength.Short).Show();
-                //    }
-                //}
+                SubmitUrl(url);  
+               
             }
             catch (WebException exception)
-            {
-                string responseText;
-                //using (var reader = new StreamReader(exception.Response.GetResponseStream()))
-                //{
-                //    responseText = reader.ReadToEnd();
-                //    Console.WriteLine(responseText);
-                //}
+            {             
                 Console.WriteLine("ERROR WHEN SEND GET: " + exception);
+            }
+        }
+
+        public static void SubmitUrl(string url)
+        {
+            Task.Factory.StartNew(() => SubmitUrlPrivate(url)).ConfigureAwait(false);
+        }
+
+        private static void SubmitUrlPrivate(string url)
+        {
+            using (var webClient = new WebClient())
+            {
+                try
+                {
+                    Log.Info("Start Invoking URL: {0}", url);
+                    using (webClient.OpenRead(url))
+                    {
+                        Log.Info("End Invoking URL: {0}", url);
+                    }
+                }
+                catch (WebException ex)
+                {
+                    if (ex.Status != WebExceptionStatus.Timeout)
+                    {
+                        Log.Info("Exception Invoking URL: {0} \n {1}", url, ex.ToString());
+                        throw;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Info("Exception Invoking URL: {0} \n {1}", url, ex.ToString());
+                    throw;
+                }
             }
         }
     }

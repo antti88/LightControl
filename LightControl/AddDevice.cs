@@ -76,8 +76,7 @@ namespace LightControl
                              devidslist.Add(items.deviceId);
                          }
                          int deviceId = devidslist.Count;
-                         if (deviceId != 0)
-                         {
+                         
                              try
                              {
                                  HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
@@ -90,10 +89,10 @@ namespace LightControl
                                  Console.WriteLine("ERROR WHEN ADDING DEVICE: " + expection);
                              }
 
-                             var main = new Intent(this, typeof(MainActivity));
-                             StartActivity(main);
-                         }
-
+                         //var main = new Intent(this, typeof(MainActivity));
+                         //StartActivity(main);
+                         Toast.MakeText(this, "Device " + devName.ToString() + " added!", ToastLength.Short).Show();
+                         this.Recreate();
                      }
                      catch (Exception expection)
                      {
