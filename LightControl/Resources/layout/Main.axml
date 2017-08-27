@@ -66,7 +66,7 @@
             android:minWidth="25px"
             android:minHeight="25px"
             android:id="@+id/frameLayout1"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_width="match_parent">
             <ListView
                 android:minWidth="25px"
@@ -78,6 +78,23 @@
                 android:contextClickable="true"
                 android:clickable="true" />
         </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView
+            android:text="Temp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTemp"
+            android:padding="10dp" />
     </LinearLayout>
     <RelativeLayout
         android:minWidth="25px"

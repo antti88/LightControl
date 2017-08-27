@@ -6,6 +6,10 @@ using System;
 using Android.Content;
 using Android.Util;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace LightControl
 {
@@ -14,12 +18,13 @@ namespace LightControl
     {
 
         ListView lvDevices;
+        TextView tvTemp;
         //List<devicesItem> listDevices;
         ObservableCollection<devicesItem> listDevices;
         // string[] devicesDBList;
         Button btnDeleteDevice;
         Button btnAddDevice;
-        string nonetwor="No Connection";
+        string nonetwor = "No Connection";
         // devices;
         public CustomListAdapter adapter;
 
@@ -32,17 +37,19 @@ namespace LightControl
             lvDevices = FindViewById<ListView>(Android.Resource.Id.List);
             btnDeleteDevice = FindViewById<Button>(Resource.Id.btnDeleteDevice);
             btnAddDevice = FindViewById<Button>(Resource.Id.btnAddDevice);
+            tvTemp = FindViewById<TextView>(Resource.Id.tvTemp);
             try
             {
                 await getAdapter();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
                 Console.WriteLine("Cant get Adapter: " + ex);
                 Toast.MakeText(this, "No devices dound! No Wlan on? wrong network?", ToastLength.Long).Show();
             }
+            StartTempFetch();
             lvDevices.ItemClick += LvDevices_ItemClick;
             btnAddDevice.Click += BtnAddDevice_Click;
             btnDeleteDevice.Click += BtnDeleteDevice_Click;
@@ -78,7 +85,7 @@ namespace LightControl
                     lvDevices.Adapter = adapter;
                 }
             }
-            catch(Exception exce)
+            catch (Exception exce)
             {
                 Log.Error(nonetwor, "getAdapter catch: " + exce);
                 Toast.MakeText(this, "No devices dound! No Wlan on? wrong network?", ToastLength.Long).Show();
@@ -89,7 +96,7 @@ namespace LightControl
         private void BtnDeleteDevice_Click(object sender, EventArgs e)
         {
             Toast.MakeText(this, "Press devicename long to delete device", ToastLength.Long).Show();
-            
+
         }
 
         private void BtnAddDevice_Click(object sender, EventArgs e)
@@ -98,8 +105,8 @@ namespace LightControl
             var activityAdd = new Intent(this, typeof(AddDevice));
             StartActivity(activityAdd);
             this.OnPause();
-            
-            
+
+
         }
 
         private void LvDevices_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -142,6 +149,50 @@ namespace LightControl
             //lvDevices.Invalidate();
             //lvDevices.Adapter = customadapter;
 
+        }
+
+        public async void StartTempFetch()
+        {
+            
+           while (true)
+            {
+                Log.Info("Temp", "While started fetchin temp 20s");
+                DBDeviceHandler DBDH = new DBDeviceHandler(this, null, null, null);
+                string temp = await DBDH.GetTemp();
+                if (String.IsNullOrEmpty(temp))
+                {
+                    Log.Info("Temp", "not available");
+                    tvTemp.Text = "Temp not available";
+                }
+                else
+                {
+                    try
+                    {
+                        string output = Regex.Replace(temp, @"[|[|]|]", "");
+                        //dynamic data = JsonConvert.DeserializeObject(temp);
+                        //dynamic obj = JsonConvert.DeserializeObject(temp);
+                        Log.Info("Regex", "Output= " + output);
+                        string temparature = JObject.Parse(output)["temparature"].ToString();
+                        string date = JObject.Parse(output)["tdate"].ToString();
+                       
+
+                        Log.Info("Temp", "temp and date is:" + temp);
+                        tvTemp.Text = date + " Temp is: " + temparature;
+                    }
+                    catch(Exception ex)
+                    {
+                        Log.Info("JsonParse","Json parse error: " + ex);
+                        tvTemp.Text = temp;
+                    }
+                }
+
+                Log.Info("Temp", "Fetch done: " + tvTemp.Text);
+
+                await Task.Delay(20000);
+
+
+            }
+        
         }
 
 

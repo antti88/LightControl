@@ -63,6 +63,9 @@ namespace LightControl
 			// aapt resource value: 0x7f020000
 			public const int Icon = 2130837504;
 			
+			// aapt resource value: 0x7f020001
+			public const int Icon2 = 2130837505;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -76,14 +79,14 @@ namespace LightControl
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060013
-			public const int btnAddDevice = 2131099667;
+			// aapt resource value: 0x7f060015
+			public const int btnAddDevice = 2131099669;
 			
 			// aapt resource value: 0x7f060004
 			public const int btnAddNewDev = 2131099652;
 			
-			// aapt resource value: 0x7f060012
-			public const int btnDeleteDevice = 2131099666;
+			// aapt resource value: 0x7f060014
+			public const int btnDeleteDevice = 2131099668;
 			
 			// aapt resource value: 0x7f060008
 			public const int btndeviceoff = 2131099656;
@@ -116,13 +119,19 @@ namespace LightControl
 			public const int linearLayout1 = 2131099658;
 			
 			// aapt resource value: 0x7f060011
-			public const int relativeLayout1 = 2131099665;
+			public const int linearLayout2 = 2131099665;
+			
+			// aapt resource value: 0x7f060013
+			public const int relativeLayout1 = 2131099667;
 			
 			// aapt resource value: 0x7f060000
 			public const int textView1 = 2131099648;
 			
 			// aapt resource value: 0x7f060002
 			public const int textView2 = 2131099650;
+			
+			// aapt resource value: 0x7f060012
+			public const int tvTemp = 2131099666;
 			
 			// aapt resource value: 0x7f06000c
 			public const int tvdevice = 2131099660;

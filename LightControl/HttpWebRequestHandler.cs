@@ -25,8 +25,9 @@ namespace LightControl
             this.context = context;
         }
 
-        public void webRestHandler(string deviceId,string deviceName, string deviceState, string timer,string switchcase)
+        public async Task<string> webRestHandler(string deviceId,string deviceName, string deviceState, string timer,string switchcase)
         {
+            string temp = "";
             string url;
             try
             {
@@ -41,7 +42,10 @@ namespace LightControl
                     case "control":
                         url = "http://192.168.10.54/controller.php/?device=" + deviceId + "&onoff=" + deviceState + "&timer=" + timer;                      
                         break;
-                    
+                    case "temp":
+                        url = "http://192.168.10.54/fetchtemp.php";
+                        break;
+
                     default:
                         url = "http://192.168.10.54/fetchall.php";
                         break;           
@@ -49,22 +53,27 @@ namespace LightControl
 
                 //**<-FIRE-AND-FORGET->**//
                 Console.WriteLine(url);
-                SubmitUrl(url);  
+                temp = await SubmitUrl(url);  
+                
                
             }
             catch (WebException exception)
             {             
                 Console.WriteLine("ERROR WHEN SEND GET: " + exception);
             }
+            return temp;
         }
 
-        public static void SubmitUrl(string url)
+        public async Task<string> SubmitUrl(string url)
         {
-            Task.Factory.StartNew(() => SubmitUrlPrivate(url)).ConfigureAwait(false);
+           
+          string temp = await Task.Factory.StartNew(() => SubmitUrlPrivate(url)).ConfigureAwait(false);
+          return temp;
         }
 
-        private static void SubmitUrlPrivate(string url)
+        private static string SubmitUrlPrivate(string url)
         {
+            string restemp = "";
             using (var webClient = new WebClient())
             {
                 try
@@ -73,6 +82,17 @@ namespace LightControl
                     using (webClient.OpenRead(url))
                     {
                         Log.Info("End Invoking URL: {0}", url);
+                        try
+                        {
+                                                      
+                            restemp = webClient.DownloadString(url);
+                            return restemp;
+                        }
+                        catch(Exception exx)
+                        {
+                            Log.Error("TempFetch", "Error when fetch: " + exx);
+                            return restemp;
+                        }
                     }
                 }
                 catch (WebException ex)
@@ -80,14 +100,18 @@ namespace LightControl
                     if (ex.Status != WebExceptionStatus.Timeout)
                     {
                         Log.Info("Exception Invoking URL: {0} \n {1}", url, ex.ToString());
+                        return restemp;
                         throw;
+                        
                     }
                 }
                 catch (Exception ex)
                 {
                     Log.Info("Exception Invoking URL: {0} \n {1}", url, ex.ToString());
+                    return restemp;
                     throw;
                 }
+                return restemp;
             }
         }
     }

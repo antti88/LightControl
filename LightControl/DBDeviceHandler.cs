@@ -11,6 +11,8 @@ using Android.Views;
 using Android.Widget;
 using System.Net;
 using System.IO;
+using Android.Util;
+using System.Threading.Tasks;
 
 namespace LightControl
 {
@@ -57,6 +59,21 @@ namespace LightControl
             {
                 Console.WriteLine("ERROR WHEN ADDING DEVICE: " + exception);
             }
+        }
+        public async Task<string> GetTemp()
+        {
+            string temp = "";
+            try
+            {
+                HttpWebRequestHandler HWRH = new HttpWebRequestHandler(context);
+                temp = await HWRH.webRestHandler(null, null, null, null, "temp");
+
+            }
+            catch(Exception ex)
+            {
+                Log.Error("GetTemp", "Error when trying to get temp: " + ex);
+            }
+            return temp;
         }
 
     }
