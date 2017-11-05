@@ -12,6 +12,8 @@ using Android.Widget;
 using System.Net;
 using System.IO;
 using System.Collections.ObjectModel;
+using Android.Util;
+using System.Threading.Tasks;
 
 namespace LightControl
 {
@@ -25,7 +27,7 @@ namespace LightControl
         string devTimer;
         //Context context;
         AlertDialog.Builder alert;
-         
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,9 +37,9 @@ namespace LightControl
             dName = FindViewById<EditText>(Resource.Id.etDevName);
             dTimer = FindViewById<EditText>(Resource.Id.etDevTimer);
 
-            
+
             addDevice.Click += AddDevice_Click;
-            
+
 
             // Create your application here
         }
@@ -45,7 +47,7 @@ namespace LightControl
         private async void AddDevice_Click(object sender, EventArgs e)
         {
             Toast.MakeText(this, "Add Button clikced", ToastLength.Short).Show();
-            
+
             //devicesItem items = new devicesItem();
 
             if (dName.Text == "" || dTimer.Text.ToString() == "")
@@ -60,10 +62,10 @@ namespace LightControl
                 ObservableCollection<devicesItem> devlist;
                 GetDevices GD = new GetDevices();
                 devlist = await GD.GetDeviceList();
-                
+
                 alert.SetTitle("Redy to add device!");
                 alert.SetMessage("Press OK when your device is ready to pairing");
-                alert.SetPositiveButton("OK", (senderAlert, args) =>
+                alert.SetPositiveButton("OK", async (senderAlert, args) =>
                  {
                      Console.WriteLine("Devlis count: " + devlist.Count());
                      List<int> devidslist = new List<int>();
@@ -74,25 +76,27 @@ namespace LightControl
                          {
                              Console.WriteLine("DEVLIST VALUES: " + items.deviceId.ToString());
                              devidslist.Add(items.deviceId);
+                             Log.Debug("AddDevice", "Devlist count: " + devidslist.Count);
                          }
                          int deviceId = devidslist.Count;
-                         
-                             try
-                             {
-                                 HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
-                                 Console.WriteLine("TEXTINPUT: " + devName + devTimer);
-                                 HWRH.webRestHandler(deviceId.ToString(), devName, null, devTimer, "add");
-                                 HWRH.webRestHandler(deviceId.ToString(), devName, "on", "0", "control");
-                             }
-                             catch (Exception expection)
-                             {
-                                 Console.WriteLine("ERROR WHEN ADDING DEVICE: " + expection);
-                             }
+
+                         try
+                         {
+                             HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
+                             Console.WriteLine("TEXTINPUT: " + devName + devTimer);
+                             await HWRH.webRestHandler(deviceId.ToString(), devName, null, devTimer, "add");
+                             await Task.Delay(500);
+                             await HWRH.webRestHandler(deviceId.ToString(), devName, "on", "0", "control");
+                         }
+                         catch (Exception expection)
+                         {
+                             Console.WriteLine("ERROR WHEN ADDING DEVICE: " + expection);
+                         }
 
                          //var main = new Intent(this, typeof(MainActivity));
                          //StartActivity(main);
                          Toast.MakeText(this, "Device " + devName.ToString() + " added!", ToastLength.Short).Show();
-                         this.Recreate();
+                         //this.Recreate();
                      }
                      catch (Exception expection)
                      {
@@ -107,6 +111,6 @@ namespace LightControl
             }
         }
 
-        
+
     }
 }

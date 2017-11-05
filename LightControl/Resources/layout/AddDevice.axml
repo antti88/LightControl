@@ -15,7 +15,8 @@
         android:id="@+id/etDevName"
         android:background="@color/white"
         android:padding="12dp"
-        android:layout_margin="12dp" />
+        android:layout_margin="12dp"
+        android:textColor="@android:color/black" />
     <TextView
         android:text="Timer when device shutdown:"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -29,7 +30,8 @@
         android:background="@color/white"
         android:id="@+id/etDevTimer"
         android:padding="12dp"
-        android:layout_margin="12dp" />
+        android:layout_margin="12dp"
+        android:textColor="@android:color/black" />
     <Button
         android:text="Add Device"
         android:layout_width="wrap_content"

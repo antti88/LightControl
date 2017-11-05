@@ -61,8 +61,10 @@ namespace LightControl
             {
                 Log.Error(nonetwor, "getAdapter try: ");
                 GetDevices GD = new GetDevices();
+                listDevices.Clear();
+                
                 listDevices = await GD.GetDeviceList();
-                Log.Error(nonetwor, "getAdapter Listdevice: ");
+                Log.Error(nonetwor, "listDevices count: " + listDevices.Count);
                 if (listDevices == null)
                 {
                     Log.Error(nonetwor, "getAdapter Listdevice: null");
@@ -80,6 +82,7 @@ namespace LightControl
                 }
                 else
                 {
+                    
                     Log.Error(nonetwor, "getAdapter Listdevice: Else");
                     adapter = new CustomListAdapter(this, listDevices);
                     lvDevices.Adapter = adapter;
@@ -105,8 +108,6 @@ namespace LightControl
             var activityAdd = new Intent(this, typeof(AddDevice));
             StartActivity(activityAdd);
             this.OnPause();
-
-
         }
 
         private void LvDevices_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -188,7 +189,7 @@ namespace LightControl
 
                 Log.Info("Temp", "Fetch done: " + tvTemp.Text);
 
-                await Task.Delay(20000);
+                await Task.Delay(300000);
 
 
             }

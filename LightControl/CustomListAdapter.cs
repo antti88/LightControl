@@ -35,7 +35,8 @@ namespace LightControl
         public override int Count
         {
             get
-            {            
+            {
+                Log.Debug("ArrayAdapter", "List count: " + devicelistArrayList.Count);
                 return devicelistArrayList.Count;
             }
         }

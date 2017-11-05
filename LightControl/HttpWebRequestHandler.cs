@@ -29,6 +29,7 @@ namespace LightControl
         {
             string temp = "";
             string url;
+            Log.Debug("WebHandler", "Starting " + switchcase);
             try
             {
                 switch (switchcase)
@@ -52,7 +53,7 @@ namespace LightControl
                 }
 
                 //**<-FIRE-AND-FORGET->**//
-                Console.WriteLine(url);
+                Console.WriteLine("Urli= ",url);
                 temp = await SubmitUrl(url);  
                 
                
@@ -68,6 +69,7 @@ namespace LightControl
         {
            
           string temp = await Task.Factory.StartNew(() => SubmitUrlPrivate(url)).ConfigureAwait(false);
+            Log.Debug("Response","server response: " + temp);
           return temp;
         }
 
