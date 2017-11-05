@@ -24,7 +24,7 @@ namespace LightControl
         // string[] devicesDBList;
         Button btnDeleteDevice;
         Button btnAddDevice;
-        string nonetwor = "No Connection";
+        string nonetwork = "No Connection";
         // devices;
         public CustomListAdapter adapter;
 
@@ -59,15 +59,16 @@ namespace LightControl
         {
             try
             {
-                Log.Error(nonetwor, "getAdapter try: ");
+                Log.Error(nonetwork, "getAdapter try: ");
                 GetDevices GD = new GetDevices();
                 listDevices.Clear();
                 
+                
                 listDevices = await GD.GetDeviceList();
-                Log.Error(nonetwor, "listDevices count: " + listDevices.Count);
+                Log.Error(nonetwork, "listDevices count: " + listDevices.Count);
                 if (listDevices == null)
                 {
-                    Log.Error(nonetwor, "getAdapter Listdevice: null");
+                    Log.Error(nonetwork, "getAdapter Listdevice: null");
                     Toast.MakeText(this, "No devices found! No Wlan on? wrong network?", ToastLength.Long).Show();
                     AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
@@ -83,14 +84,14 @@ namespace LightControl
                 else
                 {
                     
-                    Log.Error(nonetwor, "getAdapter Listdevice: Else");
+                    Log.Error(nonetwork, "getAdapter Listdevice: Else");
                     adapter = new CustomListAdapter(this, listDevices);
                     lvDevices.Adapter = adapter;
                 }
             }
             catch (Exception exce)
             {
-                Log.Error(nonetwor, "getAdapter catch: " + exce);
+                Log.Error(nonetwork, "getAdapter catch: " + exce);
                 Toast.MakeText(this, "No devices dound! No Wlan on? wrong network?", ToastLength.Long).Show();
             }
 

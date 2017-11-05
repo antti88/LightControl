@@ -76,45 +76,58 @@ namespace LightControl
         private static string SubmitUrlPrivate(string url)
         {
             string restemp = "";
-            using (var webClient = new WebClient())
-            {
-                try
+           
+
+
+                using (var webClient = new WebClient())
                 {
-                    Log.Info("Start Invoking URL: {0}", url);
-                    using (webClient.OpenRead(url))
+                    try
                     {
-                        Log.Info("End Invoking URL: {0}", url);
-                        try
+                        Log.Info("Start Invoking URL: {0}", url);
+                        using (webClient.OpenRead(url))
                         {
-                                                      
-                            restemp = webClient.DownloadString(url);
-                            return restemp;
+                        if (url.Contains("add"))
+                        {
+                            //DO nothing
                         }
-                        catch(Exception exx)
+                        else
                         {
-                            Log.Error("TempFetch", "Error when fetch: " + exx);
-                            return restemp;
+                            Log.Info("End Invoking URL: {0}", url);
+                            try
+                            {
+
+                                restemp = webClient.DownloadString(url);
+                                return restemp;
+                            }
+                            catch (Exception exx)
+                            {
+                                Log.Error("TempFetch", "Error when fetch: " + exx);
+                                return restemp;
+                            }
+                        }
                         }
                     }
-                }
-                catch (WebException ex)
-                {
-                    if (ex.Status != WebExceptionStatus.Timeout)
+                    catch (WebException ex)
+                    {
+                        if (ex.Status != WebExceptionStatus.Timeout)
+                        {
+                            Log.Info("Exception Invoking URL: {0} \n {1}", url, ex.ToString());
+                            return restemp;
+                            throw;
+
+                        }
+                    }
+                    catch (Exception ex)
                     {
                         Log.Info("Exception Invoking URL: {0} \n {1}", url, ex.ToString());
                         return restemp;
                         throw;
-                        
                     }
-                }
-                catch (Exception ex)
-                {
-                    Log.Info("Exception Invoking URL: {0} \n {1}", url, ex.ToString());
-                    return restemp;
-                    throw;
-                }
-                return restemp;
+                    
+                
+                
             }
+            return restemp;
         }
     }
 }

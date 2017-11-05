@@ -85,7 +85,7 @@ namespace LightControl
                              HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
                              Console.WriteLine("TEXTINPUT: " + devName + devTimer);
                              await HWRH.webRestHandler(deviceId.ToString(), devName, null, devTimer, "add");
-                             await Task.Delay(500);
+                             await Task.Delay(500);                            
                              await HWRH.webRestHandler(deviceId.ToString(), devName, "on", "0", "control");
                          }
                          catch (Exception expection)
