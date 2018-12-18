@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace LightControl
 {
-    [Activity(Label = "LightControl", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Marvin Control Panel", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
 
@@ -37,9 +37,16 @@ namespace LightControl
             lvDevices = FindViewById<ListView>(Android.Resource.Id.List);
             btnDeleteDevice = FindViewById<Button>(Resource.Id.btnDeleteDevice);
             btnAddDevice = FindViewById<Button>(Resource.Id.btnAddDevice);
-            tvTemp = FindViewById<TextView>(Resource.Id.tvTemp);
+            tvTemp = FindViewById<TextView>(Resource.Id.tvTemp1);
+
             try
             {
+                CheckWiFi checkwifi = new CheckWiFi();
+                NetworkState state = checkwifi.State;
+                if(state != NetworkState.ConnectedWifi)
+                {
+                    ShowDialog("No WiFi", "You can only control lights via WiFi");
+                }
                 await getAdapter();
 
             }
@@ -47,7 +54,7 @@ namespace LightControl
             {
 
                 Console.WriteLine("Cant get Adapter: " + ex);
-                Toast.MakeText(this, "No devices dound! No Wlan on? wrong network?", ToastLength.Long).Show();
+                Toast.MakeText(this, "No devices found! No Wlan on? wrong network?", ToastLength.Long).Show();
             }
             StartTempFetch();
             lvDevices.ItemClick += LvDevices_ItemClick;
@@ -197,6 +204,22 @@ namespace LightControl
         
         }
 
+        public void ShowDialog(string Title, string Message, int IconAttribute = Android.Resource.Attribute.AlertDialogIcon)
+        {
+            
+
+            var builder = new AlertDialog.Builder(this);
+            builder.SetIconAttribute(IconAttribute);
+            builder.SetTitle(Title);
+            builder.SetMessage(Message);
+
+            builder.SetPositiveButton("Open settings", (senderAlert, args) =>
+            {
+                this.StartActivity(new Android.Content.Intent(Android.Provider.Settings.ActionWifiSettings));
+            });
+            builder.Show();
+            
+        }
 
     }
 }

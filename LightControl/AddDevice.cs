@@ -91,6 +91,7 @@ namespace LightControl
                          catch (Exception expection)
                          {
                              Console.WriteLine("ERROR WHEN ADDING DEVICE: " + expection);
+                             Toast.MakeText(this, "Error! something went wrong, try again...", ToastLength.Short).Show();
                          }
 
                          //var main = new Intent(this, typeof(MainActivity));
@@ -101,6 +102,7 @@ namespace LightControl
                      catch (Exception expection)
                      {
                          Console.WriteLine("foreach error: " + expection);
+                         Toast.MakeText(this, "Error! something went wrong, try again...", ToastLength.Short).Show();
                      }
 
                  });

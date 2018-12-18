@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:background="@drawable/background">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -28,11 +30,12 @@
                 android:id="@+id/tvdevice"
                 android:layout_row="0"
                 android:layout_columnWeight="1"
+                android:paddingLeft="10dp"
                 android:layout_rowWeight="1"
                 android:textSize="38px"
                 android:textStyle="bold" />
             <TextView
-                android:text="PUT ON:"
+                android:text="ON:"
                 android:layout_width="48px"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvputon"
@@ -40,9 +43,11 @@
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:textSize="38px"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center" 
+                 />
             <TextView
-                android:text="PUT OFF:"
+                android:text="OFF:"
                 android:layout_width="48px"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvputoff"
@@ -50,17 +55,21 @@
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:textSize="37px"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center" />
             <TextView
-                android:text="PUT OFF AFTER(min):"
+                android:text="TIMER(min):"
                 android:layout_width="48px"
                 android:layout_height="wrap_content"
                 android:id="@+id/devicetimer"
                 android:layout_row="0"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
+                android:paddingTop="5dp"
                 android:textStyle="bold"
-                android:textSize="28px" />
+                android:textSize="28px"
+                android:paddingRight="5dp"
+                android:gravity="center" />
         </GridLayout>
         <FrameLayout
             android:minWidth="25px"
@@ -79,28 +88,12 @@
                 android:clickable="true" />
         </FrameLayout>
     </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TextView
-            android:text="Temp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvTemp"
-            android:padding="10dp" />
-    </LinearLayout>
+
     <RelativeLayout
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/relativeLayout1"
         android:layout_gravity="bottom">
         <Button
@@ -109,13 +102,67 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_margin="12dp" />
+            android:layout_margin="12dp"
+            android:foregroundGravity="bottom"
+            android:gravity="center"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentBottom="true" />
         <Button
             android:text="Add Device"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnAddDevice"
             android:layout_alignParentLeft="true"
-            android:layout_margin="12dp" />
+            android:layout_margin="12dp"
+            android:gravity="center"            
+            android:layout_alignParentBottom="true" 
+             />
+        <GridLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gridLayoutInfo"
+            android:rowCount="1"
+            android:orientation="horizontal"
+            android:columnCount="4"
+            android:alignmentMode="alignMargins"
+            android:useDefaultMargins="true">
+            <TextView
+                android:text="PC-temp 2: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTemp2"               
+                android:textSize="12dp" 
+            />
+            <TextView
+                android:text="PC- water temp: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvWaterTemp"
+                android:textSize="12dp
+                " 
+             />
+            <TextView
+                android:text="PC-temp 1: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTemp1"
+                android:padding="5dp"
+                android:textSize="12dp" />
+            <TextView
+                android:text="PC- water flow: "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvWaterFlow"
+                android:padding="5dp"
+                android:textSize="12dp"/>
+
+
+        </GridLayout>
     </RelativeLayout>
 </LinearLayout>

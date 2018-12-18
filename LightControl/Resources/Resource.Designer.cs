@@ -79,14 +79,14 @@ namespace LightControl
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060015
-			public const int btnAddDevice = 2131099669;
+			// aapt resource value: 0x7f060013
+			public const int btnAddDevice = 2131099667;
 			
 			// aapt resource value: 0x7f060004
 			public const int btnAddNewDev = 2131099652;
 			
-			// aapt resource value: 0x7f060014
-			public const int btnDeleteDevice = 2131099668;
+			// aapt resource value: 0x7f060012
+			public const int btnDeleteDevice = 2131099666;
 			
 			// aapt resource value: 0x7f060008
 			public const int btndeviceoff = 2131099656;
@@ -115,14 +115,14 @@ namespace LightControl
 			// aapt resource value: 0x7f060005
 			public const int gridLayoutAdapter = 2131099653;
 			
+			// aapt resource value: 0x7f060014
+			public const int gridLayoutInfo = 2131099668;
+			
 			// aapt resource value: 0x7f06000a
 			public const int linearLayout1 = 2131099658;
 			
 			// aapt resource value: 0x7f060011
-			public const int linearLayout2 = 2131099665;
-			
-			// aapt resource value: 0x7f060013
-			public const int relativeLayout1 = 2131099667;
+			public const int relativeLayout1 = 2131099665;
 			
 			// aapt resource value: 0x7f060000
 			public const int textView1 = 2131099648;
@@ -130,8 +130,17 @@ namespace LightControl
 			// aapt resource value: 0x7f060002
 			public const int textView2 = 2131099650;
 			
-			// aapt resource value: 0x7f060012
-			public const int tvTemp = 2131099666;
+			// aapt resource value: 0x7f060017
+			public const int tvTemp1 = 2131099671;
+			
+			// aapt resource value: 0x7f060015
+			public const int tvTemp2 = 2131099669;
+			
+			// aapt resource value: 0x7f060018
+			public const int tvWaterFlow = 2131099672;
+			
+			// aapt resource value: 0x7f060016
+			public const int tvWaterTemp = 2131099670;
 			
 			// aapt resource value: 0x7f06000c
 			public const int tvdevice = 2131099660;
@@ -180,11 +189,8 @@ namespace LightControl
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
-			
 			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			public const int ApplicationName = 2130968576;
 			
 			static String()
 			{

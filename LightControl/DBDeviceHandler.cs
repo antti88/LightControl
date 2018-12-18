@@ -43,6 +43,7 @@ namespace LightControl
             catch (Exception expcetion)
             {
                 Console.WriteLine("ERROR WHEN DELETING DEVICE: " + expcetion);
+                Toast.MakeText(context, "Error, something went wrong. try again...", ToastLength.Short).Show();
             }
         }
 
@@ -58,6 +59,7 @@ namespace LightControl
             catch (Exception exception)
             {
                 Console.WriteLine("ERROR WHEN ADDING DEVICE: " + exception);
+                Toast.MakeText(context, "Error, something went wrong. try again...", ToastLength.Short).Show();
             }
         }
         public async Task<string> GetTemp()
@@ -72,6 +74,7 @@ namespace LightControl
             catch(Exception ex)
             {
                 Log.Error("GetTemp", "Error when trying to get temp: " + ex);
+                Toast.MakeText(context, "Error, something went wrong. try again...", ToastLength.Short).Show();
             }
             return temp;
         }

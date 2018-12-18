@@ -61,6 +61,7 @@ namespace LightControl
             catch (WebException exception)
             {             
                 Console.WriteLine("ERROR WHEN SEND GET: " + exception);
+                Toast.MakeText(context, "Error, something went wrong. try again...", ToastLength.Short).Show();
             }
             return temp;
         }
