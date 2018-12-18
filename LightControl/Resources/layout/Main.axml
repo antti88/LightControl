@@ -6,77 +6,85 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:background="@drawable/background">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1">
-        <GridLayout
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/gridLayout1"
-            android:rowCount="1"
-            android:orientation="horizontal"
-            android:columnCount="5"
-            android:alignmentMode="alignMargins"
-            android:useDefaultMargins="true">
-            <TextView
-                android:text="Device:"
-                android:layout_width="48px"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvdevice"
-                android:layout_row="0"
-                android:layout_columnWeight="1"
-                android:paddingLeft="10dp"
-                android:layout_rowWeight="1"
-                android:textSize="38px"
-                android:textStyle="bold" />
-            <TextView
-                android:text="ON:"
-                android:layout_width="48px"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvputon"
-                android:layout_row="0"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:textSize="38px"
-                android:textStyle="bold"
-                android:gravity="center" 
+    android:background="@drawable/background640"
+	android:gravity="center">
+ 
+		<GridLayout
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/gridLayout1"
+			android:rowCount="1"
+			android:orientation="horizontal"
+			android:columnCount="5"
+			android:alignmentMode="alignMargins"
+			android:useDefaultMargins="true"
+			android:backgroundTint="#7f616161"
+			android:background="#ff3a3a3a"
+			android:paddingTop="5dp"
+			android:layout_gravity="center">
+		<TextView
+			android:text="Device"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/tvdevice"
+			android:layout_row="0"
+			android:layout_columnWeight="1"
+			android:paddingLeft="10dp"
+			android:layout_rowWeight="1"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="#ffe0e0e0" />
+			<TextView
+				android:text="ON"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/tvputon"
+				android:layout_row="0"
+				android:layout_columnWeight="1"
+				android:layout_rowWeight="1"
+				android:textSize="18sp"
+				android:textStyle="bold"
+				android:gravity="center" 
+			android:textColor="#ffe0e0e0"
                  />
-            <TextView
-                android:text="OFF:"
-                android:layout_width="48px"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvputoff"
-                android:layout_row="0"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:textSize="37px"
-                android:textStyle="bold"
-                android:gravity="center" />
-            <TextView
-                android:text="TIMER(min):"
-                android:layout_width="48px"
-                android:layout_height="wrap_content"
-                android:id="@+id/devicetimer"
-                android:layout_row="0"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:paddingTop="5dp"
-                android:textStyle="bold"
-                android:textSize="28px"
-                android:paddingRight="5dp"
-                android:gravity="center" />
-        </GridLayout>
+			<TextView
+				android:text="OFF"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/tvputoff"
+				android:layout_row="0"
+				android:layout_columnWeight="1"
+				android:layout_rowWeight="1"
+				android:textSize="18sp"
+				android:textStyle="bold"
+				android:gravity="center"
+		android:textColor="#ffe0e0e0"/>
+			<TextView
+				android:text="TIMER (min)"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/devicetimer"
+				android:layout_row="0"
+				android:layout_columnWeight="1"
+				android:layout_rowWeight="1"
+				android:paddingTop="5dp"
+				android:textStyle="bold"
+				android:textSize="12sp"
+				android:paddingRight="5dp"
+				android:gravity="center"
+		android:textColor="#ffe0e0e0"/>
+		</GridLayout>
         <FrameLayout
             android:minWidth="25px"
             android:minHeight="25px"
             android:id="@+id/frameLayout1"
-            android:layout_height="300dp"
-            android:layout_width="match_parent">
+            android:layout_height="180dp"
+            android:layout_width="match_parent"
+			android:backgroundTint="#7f616161"			
+			android:background="#ff3a3a3a"
+			android:paddingTop="5dp">
             <ListView
                 android:minWidth="25px"
                 android:minHeight="25px"
@@ -85,84 +93,120 @@
                 android:id="@id/android:list"
                 android:choiceMode="singleChoice"
                 android:contextClickable="true"
-                android:clickable="true" />
+                android:clickable="true"
+				android:textColor="#ffe0e0e0"
+				/>
         </FrameLayout>
-    </LinearLayout>
 
-    <RelativeLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/relativeLayout1"
-        android:layout_gravity="bottom">
-        <Button
-            android:text="Delete Device"
-            android:id="@+id/btnDeleteDevice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="12dp"
-            android:foregroundGravity="bottom"
-            android:gravity="center"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentBottom="true" />
-        <Button
-            android:text="Add Device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnAddDevice"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="12dp"
-            android:gravity="center"            
-            android:layout_alignParentBottom="true" 
-             />
-        <GridLayout
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/gridLayoutInfo"
-            android:rowCount="1"
-            android:orientation="horizontal"
-            android:columnCount="4"
-            android:alignmentMode="alignMargins"
-            android:useDefaultMargins="true">
-            <TextView
-                android:text="PC-temp 2: "
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvTemp2"               
-                android:textSize="12dp" 
+	<RelativeLayout
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/relativeLayout1"
+		android:layout_gravity="bottom">
+	
+	
+
+		<GridLayout
+			android:minWidth="25px"
+			android:minHeight="25px"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/gridLayoutInfo"
+			android:rowCount="2"
+			android:orientation="horizontal"
+			android:columnCount="2"
+			android:layout_centerInParent="true"
+			android:fadingEdge="horizontal|vertical"
+			android:textAlignment="center"
+			android:backgroundTint="#7f616161"
+			android:paddingBottom="10dp"
+			android:background="#ff3a3a3a">
+			<TextView
+				android:text="PC-temp 1: "
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:id="@+id/tvTemp1"
+				android:padding="10dp"
+				android:textSize="18dp"
+				android:gravity="center"		
+				android:layout_gravity="center"
+			android:textColor="#ffe0e0e0"/>
+			<TextView
+				android:text="PC-temp 2: "
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:id="@+id/tvTemp2"
+				android:textSize="18dp"
+				android:padding="10dp"
+				android:gravity="center" 
+				android:textColor="#ffe0e0e0"
+				android:layout_gravity="center"
             />
-            <TextView
-                android:text="PC- water temp: "
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvWaterTemp"
-                android:textSize="12dp
-                " 
+			<TextView
+				android:text="PC- water temp: "
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:id="@+id/tvWaterTemp"
+				android:textSize="18dp"
+				android:padding="10dp"
+				android:gravity="center" 
+				android:textColor="#ffe0e0e0"
+				android:layout_gravity="center"
              />
-            <TextView
-                android:text="PC-temp 1: "
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvTemp1"
-                android:padding="5dp"
-                android:textSize="12dp" />
-            <TextView
-                android:text="PC- water flow: "
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvWaterFlow"
-                android:padding="5dp"
-                android:textSize="12dp"/>
-
-
-        </GridLayout>
-    </RelativeLayout>
+			<TextView
+				android:text="PC- water flow: "
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:id="@+id/tvWaterFlow"
+				android:padding="10dp"
+				android:textSize="18dp"
+				android:gravity="center"
+			android:textColor="#ffe0e0e0"
+			android:layout_gravity="center"/>
+			<Button
+				android:text="Add"
+				android:id="@+id/btnAddDevice"
+				android:layout_width="120dp"
+				android:layout_height="wrap_content"
+				android:layout_alignParentLeft="true"
+				android:gravity="center"
+				android:layout_alignParentBottom="true"
+				android:textColor="#ffe0e0e0"
+				android:background="#7f000000"
+				android:textAlignment="center"
+				android:layout_gravity="center"			
+				android:layout_marginBottom="5dp"
+             />
+			<Button
+				android:text="Delete"
+				android:layout_width="120dp"
+				android:id="@+id/btnDeleteDevice"
+				android:layout_alignParentRight="true"
+				android:foregroundGravity="bottom"
+				android:gravity="center"
+				android:layout_alignParentStart="false"
+				android:layout_alignParentBottom="true"
+				android:background="#7f000000"
+				android:textColor="#ffff1744"
+				android:layout_marginBottom="5dp"
+				android:layout_gravity="center"/>
+			
+			<Button
+				android:text="Marvin On"
+				android:layout_width="120dp"
+				android:id="@+id/btnPcOnOff"
+				android:gravity="center"
+				android:textColor="#ffe0e0e0"
+				android:background="#7f000000"
+				android:layout_gravity="center"
+             />
+			<Button
+				android:text="Lights on"
+				android:layout_width="120dp"
+				android:id="@+id/btnLightsOn"
+				android:gravity="center"
+				android:textColor="#ffe0e0e0"
+				android:background="#7f000000"
+				android:layout_gravity="center"
+             />
+		</GridLayout>
+	</RelativeLayout>
 </LinearLayout>

@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Android.Content.PM;
 
 namespace LightControl
 {
-    [Activity(Label = "Marvin Control Panel", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Marvin Control Panel", MainLauncher = true, Icon = "@drawable/icon", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
 
