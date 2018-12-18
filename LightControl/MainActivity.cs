@@ -26,6 +26,7 @@ namespace LightControl
         Button btnDeleteDevice;
         Button btnAddDevice;
         string nonetwork = "No Connection";
+        CheckWiFi checkwifi;
         // devices;
         public CustomListAdapter adapter;
 
@@ -39,13 +40,15 @@ namespace LightControl
             btnDeleteDevice = FindViewById<Button>(Resource.Id.btnDeleteDevice);
             btnAddDevice = FindViewById<Button>(Resource.Id.btnAddDevice);
             tvTemp = FindViewById<TextView>(Resource.Id.tvTemp1);
-
+            checkwifi = new CheckWiFi();
             try
             {
-                CheckWiFi checkwifi = new CheckWiFi();
+                Console.WriteLine("Wificheck");
                 NetworkState state = checkwifi.State;
-                if(state != NetworkState.ConnectedWifi)
+                Console.WriteLine("Wificheck: " + state.ToString());
+                if (state != NetworkState.ConnectedWifi)
                 {
+                    Console.WriteLine("Starting show dialog");
                     ShowDialog("No WiFi", "You can only control lights via WiFi");
                 }
                 await getAdapter();
@@ -81,7 +84,7 @@ namespace LightControl
                     AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
                     alert.SetTitle("No network");
-                    alert.SetMessage("Connect network and try again");
+                    alert.SetMessage("Recreating application...");
                     alert.SetPositiveButton("OK", (senderAlert, args) =>
                     {
                         this.Recreate();
@@ -100,7 +103,7 @@ namespace LightControl
             catch (Exception exce)
             {
                 Log.Error(nonetwork, "getAdapter catch: " + exce);
-                Toast.MakeText(this, "No devices dound! No Wlan on? wrong network?", ToastLength.Long).Show();
+                Toast.MakeText(this, "No devices found! No Wlan? Wrong network?", ToastLength.Long).Show();
             }
 
         }
@@ -113,10 +116,26 @@ namespace LightControl
 
         private void BtnAddDevice_Click(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Button ADD clicked", ToastLength.Short).Show();
-            var activityAdd = new Intent(this, typeof(AddDevice));
-            StartActivity(activityAdd);
-            this.OnPause();
+            try
+            {
+                Console.WriteLine("Wificheck");
+                NetworkState state = checkwifi.State;
+                Console.WriteLine("Wificheck: " + state.ToString());
+                if (state != NetworkState.ConnectedWifi)
+                {
+                    Console.WriteLine("Starting show dialog");
+                    ShowDialog("No WiFi", "You can only control lights via WiFi");
+                }
+                Toast.MakeText(this, "Button ADD clicked", ToastLength.Short).Show();
+                var activityAdd = new Intent(this, typeof(AddDevice));
+                StartActivity(activityAdd);
+                this.OnPause();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error in btn add device: " + ex);
+                Toast.MakeText(this, "Error, try again...", ToastLength.Long).Show();
+            }
         }
 
         private void LvDevices_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -217,6 +236,22 @@ namespace LightControl
             builder.SetPositiveButton("Open settings", (senderAlert, args) =>
             {
                 this.StartActivity(new Android.Content.Intent(Android.Provider.Settings.ActionWifiSettings));
+                //try
+                //{
+                //    Console.WriteLine("Wificheck");
+                //    NetworkState state = checkwifi.State;
+                //    Console.WriteLine("Wificheck: " + state.ToString());
+                //    if (state != NetworkState.ConnectedWifi)
+                //    {
+                //        Console.WriteLine("Starting show dialog");
+                //        ShowDialog("No WiFi", "You can only control lights via WiFi");
+                //    }
+                   
+                //}
+                //catch (Exception ex)
+                //{
+                //    Toast.MakeText(this, "Error, try again...", ToastLength.Long).Show();
+                //}
             });
             builder.Show();
             
