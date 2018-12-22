@@ -28,23 +28,19 @@ namespace LightControl
         {
             //this.context = context;
         }
-        public async System.Threading.Tasks.Task<ObservableCollection<devicesItem>> GetDeviceList()
+        public async System.Threading.Tasks.Task<List<devicesItem>> GetDeviceList()
         {
             try
             {
-
-                string url = "http://192.168.10.54/fetchall.php";
+                string DeviceIp = "192.168.0.11";
+                string url = "http://192.168.0.11/fetchall.php";
                 Console.WriteLine(url);
-                //string url = "http://192.168.10.54/controller.php/?device=2&onoff=on";
+                //string url = "http://192.168.0.11/controller.php/?device=2&onoff=on";
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.Method = "GET";
                 //using GET - request.Headers.Add ("Authorization","Authorizaation value");                   
                 request.ContentType = "application/json";
-
-
-
-
                 HttpWebResponse myResp = (HttpWebResponse)request.GetResponse();
 
                 string responseText;
@@ -54,17 +50,17 @@ namespace LightControl
                     using (var reader = new StreamReader(response.GetResponseStream()))
                     {
 
-                        var responseData = await reader.ReadToEndAsync();
+                        string responseData = await reader.ReadToEndAsync();
                         Console.WriteLine("responsedata: " + responseData);
 
-                        ObservableCollection<devicesItem> itemslist;
+                        List<devicesItem> itemslist;
                             //List<devicesItem> itemslist;
 
                             //devicesItem items = new devicesItem();
 
                             //var json = JsonConvert.SerializeObject(items);
 
-                            itemslist = JsonConvert.DeserializeObject<ObservableCollection<devicesItem>>(responseData);
+                            itemslist = JsonConvert.DeserializeObject<List<devicesItem>>(responseData);
 
                             //Console.WriteLine("DATAJSON: " + itemslist[0].deviceName + itemslist[1].deviceName);
                         

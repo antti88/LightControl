@@ -59,7 +59,7 @@ namespace LightControl
                 alert = new AlertDialog.Builder(this);
                 devName = dName.Text;
                 devTimer = dTimer.Text.ToString();
-                ObservableCollection<devicesItem> devlist;
+                List<devicesItem> devlist;
                 GetDevices GD = new GetDevices();
                 devlist = await GD.GetDeviceList();
 
@@ -67,7 +67,7 @@ namespace LightControl
                 alert.SetMessage("Press OK when your device is ready to pairing");
                 alert.SetPositiveButton("OK", async (senderAlert, args) =>
                  {
-                     Console.WriteLine("Devlis count: " + devlist.Count());
+                     //Console.WriteLine("Devlis count: " + devlist.Count());
                      List<int> devidslist = new List<int>();
                      try
                      {

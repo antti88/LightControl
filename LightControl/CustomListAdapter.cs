@@ -19,10 +19,10 @@ namespace LightControl
 {
    public class CustomListAdapter : BaseAdapter
     {
-        ObservableCollection<devicesItem> devicelistArrayList;
+        List<devicesItem> devicelistArrayList;
         private Activity activity;
 
-        public CustomListAdapter(Activity activity, ObservableCollection<devicesItem> results)
+        public CustomListAdapter(Activity activity, List<devicesItem> results)
         {
             this.activity = activity;
             devicelistArrayList = results;

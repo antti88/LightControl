@@ -20,6 +20,7 @@ namespace LightControl
     class HttpWebRequestHandler
     {
         Context context;
+        string DeviceIp = "192.168.0.11";
         public HttpWebRequestHandler(Context context)
         {
             this.context = context;
@@ -35,20 +36,20 @@ namespace LightControl
                 switch (switchcase)
                 {
                     case "add":
-                        url = "http://192.168.10.54/dbhandler.php/?device=" + deviceId + "&devicename=" + deviceName + "&timer=" + timer + "&state=add";
+                        url = "http://"+DeviceIp+"/dbhandler.php/?device=" + deviceId + "&devicename=" + deviceName + "&timer=" + timer + "&state=add";
                         break;
                     case "delete":
-                        url = "http://192.168.10.54/dbhandler.php/?device=" + deviceId  + "&state=delete";
+                        url = "http://" + DeviceIp + "/dbhandler.php/?device=" + deviceId  + "&state=delete";
                         break;
                     case "control":
-                        url = "http://192.168.10.54/controller.php/?device=" + deviceId + "&onoff=" + deviceState + "&timer=" + timer;                      
+                        url = "http://" + DeviceIp + "/controller.php/?device=" + deviceId + "&onoff=" + deviceState + "&timer=" + timer;                      
                         break;
                     case "temp":
-                        url = "http://192.168.10.54/fetchtemp.php";
+                        url = "http://" + DeviceIp + "/fetchtemp.php";
                         break;
 
                     default:
-                        url = "http://192.168.10.54/fetchall.php";
+                        url = "http://" + DeviceIp + "/fetchall.php";
                         break;           
                 }
 
@@ -87,7 +88,7 @@ namespace LightControl
                         Log.Info("Start Invoking URL: {0}", url);
                         using (webClient.OpenRead(url))
                         {
-                        if (url.Contains("add"))
+                        if (url.Contains("timer"))
                         {
                             //DO nothing
                         }

@@ -21,7 +21,7 @@ namespace LightControl
         ListView lvDevices;
         TextView tvTemp;
         //List<devicesItem> listDevices;
-        ObservableCollection<devicesItem> listDevices;
+        List<devicesItem> listDevices;
         // string[] devicesDBList;
         Button btnDeleteDevice;
         Button btnAddDevice;
@@ -35,7 +35,7 @@ namespace LightControl
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
 
-            listDevices = new ObservableCollection<devicesItem>();
+            listDevices = new List<devicesItem>();
             lvDevices = FindViewById<ListView>(Android.Resource.Id.List);
             btnDeleteDevice = FindViewById<Button>(Resource.Id.btnDeleteDevice);
             btnAddDevice = FindViewById<Button>(Resource.Id.btnAddDevice);
@@ -72,8 +72,10 @@ namespace LightControl
             {
                 Log.Error(nonetwork, "getAdapter try: ");
                 GetDevices GD = new GetDevices();
-                listDevices.Clear();
-                
+                if (listDevices != null)
+                {
+                    listDevices.Clear();
+                }
                 
                 listDevices = await GD.GetDeviceList();
                 Log.Error(nonetwork, "listDevices count: " + listDevices.Count);
