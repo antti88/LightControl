@@ -128,12 +128,14 @@ namespace LightControl
                     Console.WriteLine("Starting show dialog");
                     ShowDialog("No WiFi", "You can only control lights via WiFi");
                 }
-                Toast.MakeText(this, "Button ADD clicked", ToastLength.Short).Show();
-                var activityAdd = new Intent(this, typeof(AddDevice));
-                StartActivity(activityAdd);
-                this.OnPause();
+                else
+                {//Toast.MakeText(this, "Button ADD clicked", ToastLength.Short).Show();
+                    var activityAdd = new Intent(this, typeof(AddDevice));
+                    StartActivity(activityAdd);
+                    this.OnPause();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error in btn add device: " + ex);
                 Toast.MakeText(this, "Error, try again...", ToastLength.Long).Show();
@@ -142,11 +144,12 @@ namespace LightControl
 
         private void LvDevices_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            Toast.MakeText(this, "Button ON: " + listDevices[e.Position].deviceId + " clicked", ToastLength.Short).Show();
+            //Toast.MakeText(this, "Button ON: " + listDevices[e.Position].deviceId + " clicked", ToastLength.Short).Show();
             var index = lvDevices.SelectedItemId;
+            index = index + 1;
             Log.Info("LIST:", "INDEX= " + index);
             HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
-            HWRH.webRestHandler(index.ToString(), null, null, null, "delete");
+            HWRH.webRestHandler(index.ToString(), "deleting", "deleting", "deleting", "delete");
         }
 
 

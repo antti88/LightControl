@@ -11,12 +11,12 @@
     <TextView
         android:text="Name"
         android:id="@+id/tvdevicename"
-		android:layout_width="wrap_content"
+		android:layout_width="100dp"
 		android:layout_height="wrap_content"
 	android:padding="5dp"/>
     <Button
         android:text="On"
-		android:layout_width="wrap_content"
+		android:layout_width="50dp"
 		android:layout_height="wrap_content"
         android:id="@+id/btndeviceon"
 		android:textColor="#ffe0e0e0"
@@ -24,7 +24,7 @@
 	android:layout_margin="5dp"/>
     <Button
         android:text="Off"
-		android:layout_width="wrap_content"
+		android:layout_width="50dp"
 		android:layout_height="wrap_content"
         android:id="@+id/btndeviceoff"
 		android:textColor="#ffe0e0e0"
@@ -32,7 +32,7 @@
 	android:layout_margin="5dp"/>
     <Button
         android:text="Timer"
-		android:layout_width="wrap_content"
+		android:layout_width="50dp"
 		android:layout_height="wrap_content"
         android:id="@+id/btndevicetimer"
 		android:textColor="#ffe0e0e0"

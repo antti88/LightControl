@@ -69,7 +69,7 @@ namespace LightControl
             //deviceslist = await GD.GetDeviceList();
 
             //deviceName.Text = "DeviceName";
-            deviceName.Text = devicelistArrayList[position].deviceName;
+            deviceName.Text = devicelistArrayList[position].deviceName + " " + devicelistArrayList[position].deviceId;
             deviceOn.Text = devicelistArrayList[position].deviceOn;
             deviceOff.Text = devicelistArrayList[position].deviceOff;
             deviceTimer.Text = devicelistArrayList[position].timer.ToString();
@@ -117,8 +117,9 @@ namespace LightControl
                  {
 
                      HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
-                     HWRH.webRestHandler(position.ToString(), null, null, null, "delete");
-                     Toast.MakeText(activity, "DELETING DEVICE... " + position.ToString(), ToastLength.Long).Show();
+                     int id = position + 1;
+                     HWRH.webRestHandler(id.ToString(), null, null, null, "delete");
+                     Toast.MakeText(activity, "DELETING DEVICE... " + id.ToString(), ToastLength.Long).Show();
                      devicelistArrayList.RemoveAt(position);
                      //Recreate activity for refreshing listview
                      activity.Recreate();
