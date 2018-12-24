@@ -25,6 +25,10 @@ namespace LightControl
         // string[] devicesDBList;
         Button btnDeleteDevice;
         Button btnAddDevice;
+        Button btnMarvinOff;
+        Button btnMarvinOn;
+        Button btnLightsOn;
+        Button btnLightsOff;
         string nonetwork = "No Connection";
         CheckWiFi checkwifi;
         // devices;
@@ -40,6 +44,10 @@ namespace LightControl
             btnDeleteDevice = FindViewById<Button>(Resource.Id.btnDeleteDevice);
             btnAddDevice = FindViewById<Button>(Resource.Id.btnAddDevice);
             tvTemp = FindViewById<TextView>(Resource.Id.tvTemp1);
+            btnMarvinOff = FindViewById<Button>(Resource.Id.btnPcOff);
+            btnMarvinOn = FindViewById<Button>(Resource.Id.btnPcOn);
+            btnLightsOn = FindViewById<Button>(Resource.Id.btnLightsOn);
+            btnLightsOff = FindViewById<Button>(Resource.Id.btnLightsoff);
             checkwifi = new CheckWiFi();
             try
             {
@@ -64,8 +72,50 @@ namespace LightControl
             lvDevices.ItemClick += LvDevices_ItemClick;
             btnAddDevice.Click += BtnAddDevice_Click;
             btnDeleteDevice.Click += BtnDeleteDevice_Click;
+            btnMarvinOn.Click += BtnMarvinOn_Click;
+            btnMarvinOff.Click += BtnMarvinOff_Click;
+            btnLightsOn.Click += BtnLightsOn_Click;
+            btnLightsOff.Click += BtnLightsOff_Click;
 
         }
+
+        private void BtnLightsOff_Click(object sender, EventArgs e)
+        {
+            HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
+            HWRH.webRestHandler(null,null,null,null,"caselightclose");
+        }
+
+        private void BtnLightsOn_Click(object sender, EventArgs e)
+        {
+            HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
+            HWRH.webRestHandler(null, null, null, null, "caselighton");
+        }
+
+        private void BtnMarvinOff_Click(object sender, EventArgs e)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.SetTitle("Are you sure?");
+            alert.SetMessage("You are closing pc, are you sure?");
+            alert.SetPositiveButton("OK", (senderAlert, args) =>
+            {
+                HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
+                HWRH.webRestHandler(null, null, null, null, "shutdown");
+            });
+            alert.SetNegativeButton("Cancel", (senderAlert, args) =>
+            {                
+            });
+            Dialog dialog = alert.Create();
+            dialog.Show();
+            
+        }
+
+        private void BtnMarvinOn_Click(object sender, EventArgs e)
+        {
+            HttpWebRequestHandler HWRH = new HttpWebRequestHandler(this);
+            HWRH.webRestHandler(null, null, null, null, "start");
+        }
+
         public async System.Threading.Tasks.Task getAdapter()
         {
             try

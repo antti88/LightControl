@@ -83,8 +83,9 @@ namespace LightControl
             localOn.HandleOnClick = () =>
             {
                 HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
+                int id = position + 1;
                 //Toast.MakeText(this.activity, devicelistArrayList[position].Name + "DEVICEON id: " + position, ToastLength.Short).Show();
-               HWRH.webRestHandler(position.ToString(),null,"on",devicelistArrayList[position].timer.ToString(),"control");
+                HWRH.webRestHandler(id.ToString(),null,"on",devicelistArrayList[position].timer.ToString(),"control");
                 Log.Info("ButtonOn: ","Clicked");
             };
 
@@ -93,8 +94,9 @@ namespace LightControl
             localOff.HandleOnClick = () =>
             {
                 HttpWebRequestHandler HWRH = new HttpWebRequestHandler(activity);
+                int id = position + 1;
                 //Toast.MakeText(this.activity, devicelistArrayList[position].Name + "DEVICEON id: " + position, ToastLength.Short).Show();
-                HWRH.webRestHandler(position.ToString(), null, "off", "0", "control");
+                HWRH.webRestHandler(id.ToString(), null, "off", "0", "control");
                 Log.Info("ButtonOFF: ", "Clicked");
 
             };

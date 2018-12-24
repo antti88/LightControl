@@ -48,7 +48,18 @@ namespace LightControl
                     case "temp":
                         url = "http://" + DeviceIp + "/fetchtemp.php";
                         break;
-
+                    case "start":
+                        url = "http://" + DeviceIp + "/start.php";
+                        break;
+                    case "shutdown":
+                        url = "http://" + DeviceIp + "/shutdown.php";
+                        break;
+                    case "caselighton":
+                        url = "http://" + DeviceIp + "/caselighton.php";
+                        break;
+                    case "caselightclose":
+                        url = "http://" + DeviceIp + "/caselightclose.php";
+                        break;
                     default:
                         url = "http://" + DeviceIp + "/fetchall.php";
                         break;

@@ -94,11 +94,17 @@ namespace LightControl
 			// aapt resource value: 0x7f060016
 			public const int btnDeleteDevice = 2131099670;
 			
+			// aapt resource value: 0x7f060019
+			public const int btnLightsOn = 2131099673;
+			
+			// aapt resource value: 0x7f06001a
+			public const int btnLightsoff = 2131099674;
+			
 			// aapt resource value: 0x7f060018
-			public const int btnLightsOn = 2131099672;
+			public const int btnPcOff = 2131099672;
 			
 			// aapt resource value: 0x7f060017
-			public const int btnPcOnOff = 2131099671;
+			public const int btnPcOn = 2131099671;
 			
 			// aapt resource value: 0x7f060007
 			public const int btndeviceoff = 2131099655;

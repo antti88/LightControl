@@ -192,16 +192,36 @@
 			<Button
 				android:text="Marvin On"
 				android:layout_width="120dp"
-				android:id="@+id/btnPcOnOff"
+				android:id="@+id/btnPcOn"
 				android:gravity="center"
 				android:textColor="#ffe0e0e0"
 				android:background="#7f000000"
+				android:layout_marginBottom="5dp"
+				android:layout_gravity="center"
+             />
+			<Button
+				android:text="Marvin off"
+				android:layout_width="120dp"
+				android:id="@+id/btnPcOff"
+				android:gravity="center"
+				android:textColor="#ffe0e0e0"
+				android:background="#7f000000"
+				android:layout_marginBottom="5dp"
 				android:layout_gravity="center"
              />
 			<Button
 				android:text="Lights on"
 				android:layout_width="120dp"
 				android:id="@+id/btnLightsOn"
+				android:gravity="center"
+				android:textColor="#ffe0e0e0"
+				android:background="#7f000000"
+				android:layout_gravity="center"
+             />
+			<Button
+				android:text="Lights off"
+				android:layout_width="120dp"
+				android:id="@+id/btnLightsoff"
 				android:gravity="center"
 				android:textColor="#ffe0e0e0"
 				android:background="#7f000000"
